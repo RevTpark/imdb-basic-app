@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' show json;
-import 'package:imdb_basic_project/movieDetails.dart';
+import 'package:imdb_basic_project/widgets/movieDetails.dart';
+import 'dart:math';
 
 class GetMoviesPage extends StatefulWidget {
   const GetMoviesPage({Key? key}) : super(key: key);
@@ -12,12 +13,13 @@ class GetMoviesPage extends StatefulWidget {
 
 class _GetMoviesPageState extends State<GetMoviesPage> {
   var _moviesList = [];
-  //static const categories = ["time", "marvel", "one", "fight"];
+  static const categories = ["time", "marvel", "one", "fight", "danger", "robot", "future", "world"];
 
   _buildRow(var movieContext) {
     //callApi("s", movieTitle);
     return Card(
       elevation: 4.0,
+      color: Colors.grey,
       child: Column(
         children: [
           ListTile(
@@ -26,6 +28,8 @@ class _GetMoviesPageState extends State<GetMoviesPage> {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 15.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
             onTap:() {
@@ -76,7 +80,7 @@ class _GetMoviesPageState extends State<GetMoviesPage> {
             //print(index);
             if (index >= _moviesList.length) {
               //print("ENTERED HERE");
-              getListOfMovies("s", "one");
+              getListOfMovies("s", categories[Random().nextInt(categories.length)]);
             }
             //print(_moviesList);
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:imdb_basic_project/UserPage.dart';
-import 'package:imdb_basic_project/getMovies.dart';
-import 'dart:convert' show jsonDecode, json;
-import 'searchMovies.dart';
+import 'package:imdb_basic_project/widgets/UserPage.dart';
+import 'package:imdb_basic_project/widgets/getMovies.dart';
+import 'package:imdb_basic_project/widgets/searchMovies.dart';
+import 'package:imdb_basic_project/widgets/userDetails.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,15 +10,20 @@ void main() {
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final username;
+  final userDetails;
+  const HomePage(this.username, this.userDetails, {Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(username,userDetails);
 }
 
 class _HomePageState extends State<HomePage> {
-  //static const categories = ["time", "marvel", "one", "fight"];
   int _selectedIndex = 0;
+  final username;
+  final userDetails;
+
+  _HomePageState(this.username, this.userDetails);
 
   _onItemTapped(int index) {
     setState(() {
@@ -36,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       body: [
         GetMoviesPage(),
         searchMoviesPage(),
-        GetUserDetailsPage()
+        GetUserDetailsPage(username, userDetails)
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -60,7 +64,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         title: "Movies on Imdb",
-        home: HomePage()
+        home: GetUserDetails(),
     );
   }
 }

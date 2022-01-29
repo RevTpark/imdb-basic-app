@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' show json;
-
-import 'package:imdb_basic_project/movieDetails.dart';
+import 'package:imdb_basic_project/widgets/movieDetails.dart';
 
 
 class searchMoviesPage extends StatefulWidget {
@@ -43,9 +42,11 @@ class _searchMoviesPageState extends State<searchMoviesPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50),
+              padding: const EdgeInsets.symmetric(vertical: 25),
               child:
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.65,
@@ -72,9 +73,10 @@ class _searchMoviesPageState extends State<searchMoviesPage> {
                 return Column(
                   children: [
                     ListTile(
-                      title: Text(movies[i]),
+                      title: Text(movies[i], textAlign: TextAlign.center,),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
+                          settings: const RouteSettings(name: "/details"),
                           builder: (context) =>
                               Scaffold(
                                 appBar: AppBar(
