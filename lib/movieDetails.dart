@@ -33,43 +33,57 @@ class _GetMovieDetailsPageState extends State<GetMovieDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            const Text("Name:", style: TextStyle(fontWeight: FontWeight.bold),),
-            moviesDetails != null?Text("${moviesDetails["Title"]}"):const Text("Loading..."),
-          ],
-        ),
-        Row(
-          children:[
-            const Text("Year:", style: TextStyle(fontWeight: FontWeight.bold),),
-            moviesDetails != null?Text("${moviesDetails["Year"]}"):const Text("Loading..."),
-          ],
-        ),
-        Row(
-          children:[
-            const Text("Plot:", style: TextStyle(fontWeight: FontWeight.bold),),
-            Flexible(
-                child: moviesDetails != null?Text("${moviesDetails["Plot"]}"):const Text("Loading..."),
+    return ListView(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          shrinkWrap: true,
+          children: <Widget>[
+            moviesDetails != null?Container(
+              margin: EdgeInsets.only(top: 25.0, bottom: 25.0),
+              child: Text(
+                "${moviesDetails["Title"]}",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 35.0),
+              ),
+            ):const Text("Loading...", textAlign: TextAlign.center,),
+            Container(
+              //height: 200.0,
+              margin: EdgeInsets.only(left: 5.0, right: 5.0),
+              child: moviesDetails != null?Image.network(moviesDetails["Poster"],
+                fit: BoxFit.cover,):Image.asset("images/loading.jpg")
+            ),
+            Container(
+                child: moviesDetails != null?Text("${moviesDetails["Plot"]}",
+                textAlign: TextAlign.center,):const Text("Loading..."),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  const Text("Year:", style: TextStyle(fontWeight: FontWeight.bold),),
+                  moviesDetails != null?Text("${moviesDetails["Year"]}"):const Text("Loading..."),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  const Text("Genre:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0), ),
+                  moviesDetails != null?Text("${moviesDetails["Genre"]}"):const Text("Loading..."),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                const Text("RunTime:", style: TextStyle(fontWeight: FontWeight.bold),),
+                moviesDetails != null?Text("${moviesDetails["Runtime"]}"):const Text("Loading..."),
+              ],
             ),
           ],
-        ),
-        Row(
-          children:[
-            const Text("Genre:", style: TextStyle(fontWeight: FontWeight.bold),),
-            moviesDetails != null?Text("${moviesDetails["Genre"]}"):const Text("Loading..."),
-          ],
-        ),
-        Row(
-          children:[
-            const Text("RunTime:", style: TextStyle(fontWeight: FontWeight.bold),),
-            moviesDetails != null?Text("${moviesDetails["Runtime"]}"):const Text("Loading..."),
-          ],
-        ),
-      ],
-    );
+      );
   }
 }

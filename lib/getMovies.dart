@@ -14,23 +14,42 @@ class _GetMoviesPageState extends State<GetMoviesPage> {
   var _moviesList = [];
   //static const categories = ["time", "marvel", "one", "fight"];
 
-  _buildRow(var movieTitle) {
+  _buildRow(var movieContext) {
     //callApi("s", movieTitle);
-    return ListTile(
-      title: Text(
-        movieTitle,
-      ),
-      onTap:() {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) =>
-              Scaffold(
-                appBar: AppBar(
-                  title: const Text("Details of Movie"),
-                ),
-                body: GetMovieDetailsPage(movieTitle),
+    return Card(
+      elevation: 4.0,
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              movieContext[0],
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15.0,
               ),
-        ));
-      },
+            ),
+            onTap:() {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) =>
+                Scaffold(
+                  appBar: AppBar(
+                    title: const Text("Details of Movie"),
+                  ),
+                  body: GetMovieDetailsPage(movieContext[0]),
+                ),
+            ));
+          },
+        ),
+        Container(
+          height: 200.0,
+          margin: EdgeInsets.only(bottom: 15.0),
+          child: Image.network(
+              movieContext[1],
+              fit: BoxFit.cover,
+          ),
+        )
+        ],
+      ),
     );
   }
 
@@ -41,7 +60,7 @@ class _GetMoviesPageState extends State<GetMoviesPage> {
     //print(responseData);
     setState(() {
       for(var item in responseData){
-        _moviesList.add(item["Title"]);
+        _moviesList.add([item["Title"],item["Poster"]]);
       }
     });
   }

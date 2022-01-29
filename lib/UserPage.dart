@@ -15,14 +15,15 @@ class _GetUserDetailsPageState extends State<GetUserDetailsPage> {
       child: Column(
         children: [
           const ListTile(
-            title: Text("User Name"),
-            subtitle: Text("User Details"),
+            title: Text("User Name", textAlign: TextAlign.center,),
+            subtitle: Text("User Details", textAlign: TextAlign.center,),
           ),
           Container(
-            child: Ink.image(
-                image: const NetworkImage("https://m.media-amazon.com/images/M/MV5BMjEwMzMxODIzOV5BMl5BanBnXkFtZTgwNzg3OTAzMDI@._V1_SX300.jpg"),
+              height: 200.0,
+              child: Image.asset(
+                "images/download.png",
                 fit: BoxFit.cover,
-            ),
+              ),
           ),
         ],
       ),
